@@ -18,6 +18,8 @@ public class QuizActivity extends Activity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mCheatButton;
+
     private TextView mQuestionTextView;
 
     private TrueFalse[] mQuestionBank = new TrueFalse[] {
@@ -31,6 +33,7 @@ public class QuizActivity extends Activity {
     private int mCurrentIndex = 0;
 
     private void updateQuestion() {
+//        Log.d(TAG, "Updating question text for question #" + mCurrentIndex, new Exception());
         int question = mQuestionBank[mCurrentIndex].getQuestion();
         mQuestionTextView.setText(question);
     }
@@ -81,13 +84,22 @@ public class QuizActivity extends Activity {
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
         }
+
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start CheatActivity
+            }
+        });
+
         updateQuestion();
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        Log.i(TAG,  "onSaveInstanceState");
+        Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
     }
 
